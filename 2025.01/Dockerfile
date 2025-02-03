@@ -6,7 +6,7 @@
 # specific reason to use a different one. This means January, April, July, or
 # October.
 
-FROM cimg/%%PARENT%%:2024.02
+FROM cimg/base:2024.02
 
 LABEL maintainer="CircleCI Execution Team <eng-execution@circleci.com>"
 
@@ -41,7 +41,7 @@ RUN curl -sSL -o /tmp/maven.tar.gz http://apache.osuosl.org/maven/maven-3/${MAVE
 	sudo ln -sf /usr/local/apache-maven-${MAVEN_VERSION} /usr/local/apache-maven && \
 	rm -rf /tmp/maven.tar.gz && \
 	mkdir -p /home/circleci/.m2
-ENV GRADLE_VERSION=8.12.1
+ENV GRADLE_VERSION=8.12
 ENV PATH $PATH:/usr/local/gradle-${GRADLE_VERSION}/bin
 RUN URL=https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
 	curl -sSL -o /tmp/gradle.zip $URL && \
@@ -66,8 +66,8 @@ RUN SDK_TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-lin
 
 RUN echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "tools" && \
     echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "platform-tools" && \
-    echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "build-tools;36.0.0-rc4" && \
-    echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "build-tools;35.0.1" && \
+    echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "build-tools;36.0.0-rc3" && \
+    echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "build-tools;35.0.0-rc4" && \
     echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "build-tools;34.0.0-rc3"
 RUN echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "platforms;android-29" && \
     echo y | ${CMDLINE_TOOLS_ROOT}/sdkmanager "platforms;android-30" && \
